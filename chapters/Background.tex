@@ -1,0 +1,169 @@
+\chapter{Some Background}
+
+In this section, we provide very introductory concepts in electromagnetism to serve as a refresher of some concepts we may already know but which are very important and pop up frequently. 
+
+% -----------------------------------------
+% Complex Numbers
+% -----------------------------------------
+\section{Complex Numbers}
+A complex number $z$ expressed in a Cartesian coordinate system takes the form 
+\begin{equation}
+    z = a + jb
+\end{equation}
+where $a$ is the \textit{real part} and $b$ is the \textit{imaginary} part. The real and imaginary operators are used to extract the real and imaginary parts.
+\begin{align}
+    \Re\{z\} &= a \\ 
+    \Im\{z\} &= b
+\end{align}
+The conjugate of a complex number is 
+\begin{equation}
+    z^* = a - jb 
+\end{equation}
+Complex numbers are often expressed in polar form: 
+\begin{equation}
+    z = |z| e^{j\theta} = |z| (\cos\theta + j\sin\theta)
+\end{equation}
+where 
+\begin{align}
+    |z| &= \sqrt{a^2 + b^2} \\ 
+    \theta &= \arctan\left( \dfrac{b}{a}\right) + n\pi 
+\end{align}
+$n=0, 1, -1, \text{ or } 0$ for a complex number lying in the first, second, third, or fourth quadrant, respectively.
+
+% -----------------------------------------
+% PHASORS
+% -----------------------------------------
+\section{Phasors} 
+The general form of an AC voltage wave propagating down a line is 
+\begin{equation}
+    v(t) = |V| \cos(\omega t + \phi) 
+\end{equation}
+If we re-write this in such a way, 
+\begin{align}
+\begin{split}
+    v(t) &= |V| \Re\{e^{j\omega t + \phi} \} \\ 
+    &= |V| \Re \{e^{j\omega t} e^{j\phi} \} \\ 
+    &= \Re \{ V e^{j\omega t} \}
+\end{split}
+\end{align}
+where $V = |V|e^{j\phi}$ and $V$ is called a phasor. To emphasize that it is a phasor, people sometimes denote it with a tilde (e.g. $\phasor{V} = V $), which is the notation I will be using. Notice that $\phasor{V}$ has no time-dependence as it does not contain a term with $t$ and there is only dependence on the angular frequency $\omega$. Phasors are helpful for solving time-harmonic problems and are used in many branches of electrical engineering, physics, and more.
+
+To summarize, given some sinusoid in the time-domain $a(t)$ it can be transformed to the phasor-domain (and vice versa) as follows:
+\begin{empheq}[box=\eqnGreenBox]{equation}
+    a(t) = |\phasor{A}| \cos(\omega t + \phi) \Longleftrightarrow \phasor{A} = |\phasor{A}| e^{j\phi}
+\end{empheq}
+
+\begin{note}[Phasors in RF versus Power Engineering] 
+    The way we define phasors in RF engineering is slightly different from what you may have seen in power engineering. For example in power engineering, a phasor is typically defined in terms of root-mean-square (RMS) values: 
+    \begin{equation*}
+        \phasor{V}' = V_\text{RMS} e^{j\phi} = \dfrac{V_\text{max}}{\sqrt{2}} e^{j\phi}
+    \end{equation*}
+    However, in RF engineering, it is more common to express phasors in reference to the maximum amplitude (which is what is used in this document): 
+    \begin{empheq}[box=\eqnGreenBox]{equation}
+        \phasor{V} = V_\text{max} e^{j\phi} \label{eq: phasorsInRF}
+    \end{empheq}
+    You may be wondering why this distinction is important, and it is because it affects the constants you may see in power calculations. For example, if $|S_\text{avg}|$ is defined as the magnitude of the average power, in RF engineering we would write the equation as 
+    \begin{equation*}
+        |S_\text{avg}| = \dfrac{|\phasor{V} \phasor{I}|}{2} 
+    \end{equation*}
+    whereas in power engineering, it would be 
+    \begin{equation*}
+        |S_\text{avg}'| = |\phasor{V} \phasor{I}| 
+    \end{equation*}
+    At face-value, it would appear as if these quantities differ by a factor of 2, but actually, they are exactly equal to each other.
+    \begin{align*}
+       |S_\text{avg}| &= \dfrac{|\phasor{V} \phasor{I}|}{2} = \dfrac{V_\text{max} I_\text{max}}{2} \\ 
+       |S_\text{avg}'| &= |\phasor{V} \phasor{I}| = V_\text{RMS} I_\text{RMS} = \dfrac{V_\text{max}}{\sqrt{2}} \dfrac{I_\text{max}}{\sqrt{2}} = \dfrac{V_\text{max} I_\text{max}}{2} \\ 
+       \therefore |S_\text{avg}| &= |S_\text{avg}'| 
+    \end{align*}
+    
+    Overall, the point is to just be aware of the notation which you are following. Either one will take you to the right answer, but I will be following the notation more commonly used in RF engineering, shown in Eq.\ (\ref{eq: phasorsInRF}). 
+\end{note}
+
+% -----------------------------------------
+% Basic Vector Calculus
+% -----------------------------------------
+\section{Basic Vector Calculus}
+
+% --- Vector Algebra
+\subsection{Vector Algebra}
+In Cartesian coordinate, the \coltextit{base vectors} are $\uvec{x}$, $\uvec{y}$, $\uvec{z}$. These are the orthogonal vectors which define the coordinate system. In this section we'll use a vectors defined in Cartesian coordinates, but the same rules are applicable to other vector bases.\par 
+
+The general form of a vector $\vec{A}$ is then 
+\begin{equation}
+    \vec{A} = \uvec{x}\ A_x + \uvec{y}\ A_y + \uvec{z}\ A_z 
+\end{equation}
+where $A_x$, $A_y$, and $A_z$ are scalar components. The magnitude of $\vec{A}$ is 
+\begin{equation}
+    |\vec{A}| = A = \sqrt{A_x^2 + A_y^2 + A_z^2}
+\end{equation}
+The unit vector representing the direction of the vector $\vec{A}$ is 
+\begin{equation}
+    \uvec{a} = \dfrac{\vec{A}}{|\vec{A}|}
+\end{equation}
+
+% --- Curl and Divergence 
+\subsection{Curl and Divergence}
+Vector functions of two or three variables are called \coltextit{vector fields}. For example,
+\begin{equation}
+    \vec{F}(x,y,z) = \uvec{x} \ F_x(x,y,z) + \uvec{y} \ F_y(x,y,z) + \uvec{z} \ F_z(x,y,z) \label{eq:vectorField}
+\end{equation}
+is a vector field.
+\begin{note}[Vector Fields]
+    Vector fields do not have to take the form shown in Eq.\ (\ref{eq:vectorField}); this is merely the general form in Cartesian coordinates. We may adapt this form to any basis we wish. In spherical coordinates for example, we may describe a vector field as 
+    \begin{equation}
+        \vec{F}(r,\theta,\phi) = \uvec{r}\ F_r(r,\theta,\phi) + \uvec{\theta}\ F_\theta(r,\theta,\phi) + \uvec{\phi}\ F_\phi(r,\theta,\phi) 
+    \end{equation}
+\end{note}
+
+The del operator is 
+\begin{equation}
+    \nabla = \uvec{x} \ \dfrac{\partial}{\partial x} + \uvec{y} \ \dfrac{\partial}{\partial y} + \uvec{z} \ \dfrac{\partial}{\partial z} 
+\end{equation}
+When the del operator acts on a scalar function $\phi(x,y,z)$, it produces a vector field called the \coltextit{gradient field}. 
+\begin{equation}
+    \vec{F}(x,y,z) = \nabla\phi = \uvec{x}\ \dfrac{\partial\phi}{\partial x} + \uvec{y}\ \dfrac{\partial\phi}{\partial y} + \uvec{z}\ \dfrac{\partial\phi}{\partial z}
+\end{equation}
+The \coltextit{divergence} of a vector field $\vec{F}$ at a point $(x,y,z)$ is the flux per unit volume, and is simply the dot product of the del operator and the field. 
+\begin{empheq}[box=\eqnGreenBox]{equation}
+    \mathrm{div} \ \vec{F} = \nabla\cdot\vec{F} = \dfrac{\partial F_x}{\partial x} + \dfrac{\partial F_y}{\partial y} + \dfrac{\partial F_z}{\partial z}
+\end{empheq}
+The curl of a vector field $\vec{F}$ is a measure of the rotation of the field. 
+\begin{empheq}[box=\eqnGreenBox]{align}
+    \begin{split}
+        \mathrm{curl} \ \vec{F} = \nabla \times \vec{F} &=
+        \begin{vmatrix}
+            \uvec{x} & \uvec{y} & \uvec{z} \\ 
+            \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\ 
+            F_x & F_y & F_z
+        \end{vmatrix} 
+    \end{split}
+\end{empheq}
+If one were to expand this out, the curl may simply be written as
+\begin{equation}
+    \nabla \times \vec{F} = \uvec{x} \ \left(\dfrac{\partial F_z}{\partial y} - \dfrac{\partial F_y}{\partial z} \right) + \uvec{y} \ \left(\dfrac{\partial F_x}{\partial z} - \dfrac{\partial F_z}{\partial x} \right) + \uvec{z} \ \left( \dfrac{\partial F_y}{\partial x} - \dfrac{\partial F_x}{\partial y} \right)
+\end{equation}
+
+\begin{note}[Physical meaning of divergence and curl]
+    As said earlier, the divergence of a field is the flux per unit volume. If you measure the divergence at some point $P(x,y,z)$:
+    \begin{itemize}
+        \item If $\divergence\vec{F}(P) < 0$, then $P$ is a source
+        \item If $\divergence\vec{F}(P) < 0$, then $P$ is a sink
+        \item If $\divergence\vec{F}(P) = 0$, there are no sources/sinks near $P$
+    \end{itemize}
+    Flux in electromagnetics refers to the amount of field ``flowing'' in or out of a surface. Flux may be calculated by summing the divergence at each point along some surface $S$. Gauss's law (which will be examined later) states that the electric flux is proportional to the total charge enclosed by a surface:
+    \begin{equation}
+        \Phi = \oiint\limits_S \vec{E} \cdot \uvec{n} \ dS = \iiint\limits_V \nabla \cdot \vec{E} \ dV  = \dfrac{Q_\text{enc}}{\varepsilon_0}
+    \end{equation}
+    The curl of a field measures the rotation of a field at some point. 
+    \begin{itemize}
+        \item If $\nabla \times \vec{F} = \vec{0}$, the field is said to be irrotational. 
+    \end{itemize}
+    Notice above how we use the zero vector ($\vec{0}$) to indicate if the curl is equal to zero at \textit{all} points.
+\end{note}
+
+% -----------------------------------------
+% Coordinate Systems
+% -----------------------------------------
+\section{Coordinate Systems}
+Spherical

@@ -1,0 +1,80 @@
+\documentclass[14pt]{extreport}
+
+\input{preamble}
+
+% -----------------------------------------------------
+% PDF Title
+\hypersetup{
+    pdftitle={Transmission-Line Theory}
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BEGIN DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\setsansfont{Poppins}[
+    Path=./fonts/Poppins/,
+    Scale = 1,
+    Extension = .ttf,
+    UprightFont=*-Regular,
+    BoldFont=*-SemiBold,
+    ItalicFont=*-Italic,
+    BoldItalicFont=*-BoldItalic
+    ]
+
+\thispagestyle{empty}
+% ---------- TITLE PAGE ---------- %
+\begin{titlepage}
+    \centering
+    % \includegraphics[width=0.3\textwidth]{images/Carleton Logo (Cropped).png} % Include your logo here
+    % \vskip 1cm
+    % {\scshape\LARGE Carleton University \par}
+    % \vspace{1cm}
+    % {\scshape\Large MARS Research Group \par}
+    \vspace*{4cm}
+    {\Huge\bfseries Electromagnetic Wave Propagation \par}
+    \vspace{0.5cm}
+    {\large \textsl{A document summarizing the fundamental theory} \par}
+    \vfill
+    {Source code of this document is hosted on GitHub:} \\
+    \url{https://github.com/davidfhardy/LaTeX} \\[1cm]
+    {Document created by David Hardy} \\ 
+    {\today} 
+\end{titlepage}
+
+% -------------------------------------- %
+% Table of Contents
+% -------------------------------------- %
+\tableofcontents
+\thispagestyle{empty}
+
+\clearpage
+\pagenumbering{arabic}
+
+% Some Background -----------------------------------
+\input{chapters/Background}
+
+% Transmission Line Theory --------------------------
+\input{chapters/TransmissionLineTheory}
+
+% Time Varying Fields --------------------------
+\input{chapters/TimeVaryingFields}
+
+% Plane-Wave Propagation -----------------------
+\input{chapters/PlaneWavePropagation}
+
+% Microwave Networks --------------------------
+\input{chapters/WaveReflectionAndTransmission}
+
+% Microwave Networks --------------------------
+\input{chapters/MicrowaveNetworks}
+
+\printbibliography
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% END DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
